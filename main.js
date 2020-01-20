@@ -104,7 +104,7 @@ Apify.main(async () => {
             // let dataset = Apify.openDataset(runInfo.defaultDatasetId);
             console.log('defaultDatasetId:', runInfo.defaultDatasetId)
             const info = dataset.getInfo();
-            const itemCount = info.itemCount
+            // const itemCount = info.itemCount
 
             console.log('itemCount:', itemCount)
             console.log('runInfo.stats.runTimeSecs:', runInfo.stats.runTimeSecs)
