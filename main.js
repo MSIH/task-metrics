@@ -96,6 +96,13 @@ Apify.main(async () => {
                 actId: myActor.id,
                 runId: run.id,
             })
+            const actInfo = await acts.getAct({
+                actId: myActor.id
+            })
+            
+            const taskInfo = await tasks.getTask({
+                taskId : runInfo.actorTaskId               
+            })
 
             let dataset = await Apify.openDataset(runInfo.defaultDatasetId);
             let {
@@ -103,14 +110,14 @@ Apify.main(async () => {
             } = await dataset.getInfo();
 
             const itemsPerMinute = itemCount / (runInfo.stats.runTimeSecs * 60)
-            const ItemsPerCU = itemCount / runInfo.stats.computeUnits
+            const itemsPerCU = itemCount / runInfo.stats.computeUnits
 
 
             const metrix = {
                 actId: runInfo.actId,
-                // actName: actName,
+                actName: actInfo.name,
                 actorTaskId: runInfo.actorTaskId,
-                // actorTaskName: actorTaskName,
+                actorTaskName: taskInfo.name,
                 startedAt: runInfo.startedAt,
                 finishedAt: runInfo.finishedAt,
                 status: runInfo.status,
@@ -124,7 +131,7 @@ Apify.main(async () => {
                 defaultDatasetId: runInfo.defaultDatasetId,
                 itemCount: itemCount,
                 itemsPerMinute: itemsPerMinute.toFixed(2),
-                ItemsPerCU: ItemsPerCU.toFixed(2)
+                ItemsPerCU: itemsPerCU.toFixed(2)
 
             }
             console.log('metrix:', JSON.stringify(metrix))
