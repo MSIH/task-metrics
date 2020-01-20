@@ -94,27 +94,15 @@ Apify.main(async () => {
                 actId: myActor.id,
                 runId: run.id,
             })
+
             let dataset = await Apify.openDataset(runInfo.defaultDatasetId);
             let {
                 itemCount
             } = await dataset.getInfo();
-            console.log('itemCount:', itemCount)
-            console.log('defaultDatasetId:', runInfo.defaultDatasetId)
-
-            /*
-            let dataset = Apify.openDataset(runInfo.defaultDatasetId);
-            console.log('defaultDatasetId:', runInfo.defaultDatasetId)
-            const info = dataset.getInfo();
-             const itemCount = info.itemCount
-*/
-            console.log('itemCount:', itemCount)
-            console.log('runInfo.stats.runTimeSecs:', runInfo.stats.runTimeSecs)
-            console.log('runInfo.stats.computeUnits:', runInfo.stats.computeUnits)
 
             const itemsPerMinute = itemCount / (runInfo.stats.runTimeSecs * 60)
-            console.log('itemsPerMinute:', itemsPerMinute)
             const ItemsPerCU = itemCount / runInfo.stats.computeUnits
-            console.log('ItemsPerCU:', ItemsPerCU)
+
 
             const metrix = {
                 actId: runInfo.actId,
@@ -122,17 +110,17 @@ Apify.main(async () => {
                 startedAt: runInfo.startedAt,
                 finishedAt: runInfo.finishedAt,
                 status: runInfo.status,
-                memAvgBytes: runInfo.stats.memAvgBytes,
-                memMaxBytes: runInfo.stats.memMaxBytes,
+                memAvgMbytes: runInfo.stats.memAvgBytes / (1024 * 1024),
+                memMaxMbytes: runInfo.stats.memMaxBytes / (1024 * 1024),
                 cpuAvgUsage: runInfo.stats.cpuAvgUsage,
                 cpuMaxUsage: runInfo.stats.cpuMaxUsage,
-                runTimeSecs: runInfo.stats.runTimeSecs,
+                runTimeMinutes: runInfo.stats.runTimeSecs * 60,
                 computeUnits: runInfo.stats.computeUnits,
                 memoryMbytes: runInfo.options.memoryMbytes,
                 defaultDatasetId: runInfo.defaultDatasetId,
                 itemCount: itemCount,
-                itemsPerMinute: itemCount / runInfo.stats.runTimeSecs * 60,
-                ItemsPerCU: itemCount / runInfo.stats.computeUnits
+                itemsPerMinute: itemsPerMinute,
+                ItemsPerCU: ItemsPerCU
 
             }
             console.log('metrix:', JSON.stringify(metrix))
