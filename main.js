@@ -55,7 +55,7 @@ Apify.main(async () => {
     console.dir(input)
 
     const {
-        acts
+        acts, tasks
     } = Apify.client
     let dateFrom
     let dateTo
