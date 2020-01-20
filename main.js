@@ -112,7 +112,7 @@ Apify.main(async () => {
                 memoryMbytes: runInfo.options.memoryMbytes,
                 defaultDatasetId: runInfo.defaultDatasetId,
                 itemCount: itemCount,
-                itemsPerMinute: itemCount / runTimeSecs * 60,
+                itemsPerMinute: itemCount / runInfo.stats.runTimeSecs * 60,
                 ItemsPerCU: itemCount / computeUnits
 
             }
