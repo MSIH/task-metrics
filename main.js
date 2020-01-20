@@ -122,7 +122,7 @@ Apify.main(async () => {
                 actId: runInfo.actId,
                 actName: actInfo.name,
                 actorTaskId: runInfo.actorTaskId,
-                actorTaskName: taskInfo.name,
+                actorTaskName: taskInfoName,
                 startedAt: runInfo.startedAt,
                 finishedAt: runInfo.finishedAt,
                 status: runInfo.status,
