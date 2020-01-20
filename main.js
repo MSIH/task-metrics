@@ -94,10 +94,11 @@ Apify.main(async () => {
                 actId: myActor.id,
                 runId: run.id,
             })
+            console.log('defaultDatasetId:', runInfo.defaultDatasetId)
             const dataset = Apify.openDataset(runInfo.defaultDatasetId);
-            let {
-                itemCount
-            } = await dataset.getInfo();
+            const info = await dataset.getInfo();
+            const itemCount = info.itemCount
+
             console.log('itemCount:', itemCount)
             console.log('runInfo.stats.runTimeSecs:', runInfo.stats.runTimeSecs)
             console.log('runInfo.stats.computeUnits:', runInfo.stats.computeUnits)
