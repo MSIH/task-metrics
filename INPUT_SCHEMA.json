@@ -13,7 +13,8 @@
         "actor": {
             "title": "Actor Name or ID",
             "type": "string",
-            "description": "Enter the name or ID of actor."
+            "description": "Enter the name or ID of actor.",
+            "editor": "textfield"
         }
     }
 }
