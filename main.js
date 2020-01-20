@@ -114,7 +114,7 @@ Apify.main(async () => {
                 memMaxMbytes: runInfo.stats.memMaxBytes / (1024 * 1024),
                 cpuAvgUsage: runInfo.stats.cpuAvgUsage,
                 cpuMaxUsage: runInfo.stats.cpuMaxUsage,
-                runTimeMinutes: runInfo.stats.runTimeSecs * 60,
+                runTimeMinutes: runInfo.stats.runTimeSecs / 60,
                 computeUnits: runInfo.stats.computeUnits,
                 memoryMbytes: runInfo.options.memoryMbytes,
                 defaultDatasetId: runInfo.defaultDatasetId,
