@@ -1,6 +1,6 @@
-## actor-check-compute-per-actor
+## task-metrics
 
-This is a simple actor to check your compute units usage on Apify for each of your actor. We are planning to add this feature to the app itself, so after that this actor will be deprecated.
+This actor provides basic metrics for each task run for a given actor. 
 
 ### usage
 
