@@ -113,7 +113,7 @@ Apify.main(async () => {
                 defaultDatasetId: runInfo.defaultDatasetId,
                 itemCount: itemCount,
                 itemsPerMinute: itemCount / runInfo.stats.runTimeSecs * 60,
-                ItemsPerCU: itemCount / computeUnits
+                ItemsPerCU: itemCount / runInfo.stats.computeUnits
 
             }
             console.log('metrix:', JSON.stringify(metrix))
