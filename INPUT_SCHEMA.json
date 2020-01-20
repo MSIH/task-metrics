@@ -9,6 +9,11 @@
             "type": "string",
             "description": "Which period do you want to analyze.",
             "enum": ["last-day", "last-month", "this-month"]
+        },
+        "actor": {
+            "title": "Actor Name or ID",
+            "type": "string",
+            "description": "Enter the name or ID of actor."
         }
     }
 }
