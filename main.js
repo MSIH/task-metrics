@@ -108,7 +108,9 @@ Apify.main(async () => {
 
             const metrix = {
                 actId: runInfo.actId,
+                // actName: actName,
                 actorTaskId: runInfo.actorTaskId,
+                // actorTaskName: actorTaskName,
                 startedAt: runInfo.startedAt,
                 finishedAt: runInfo.finishedAt,
                 status: runInfo.status,
