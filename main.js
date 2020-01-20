@@ -78,6 +78,8 @@ Apify.main(async () => {
     console.log('Date to')
     console.log(dateTo)
 
+    // const myActors = input.actor ? await acts.Get(input.actor) : await getAllActors(acts, [], 0)
+
     const myActors = await getAllActors(acts, [], 0)
     console.log(`I have ${myActors.length} actors`)
     for (const myActor of myActors) {
