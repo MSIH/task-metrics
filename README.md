@@ -1,8 +1,11 @@
 ## task-metrics
 
-This actor provides basic metrics for each task run for a given actor. 
+This actor provides basic metrics for each task run for a given actor. The Actor will find all of your tasks limited by the input filter.
 
-### metric data
+### input / filter
+You can filter data based on: `last-day`, `last-month` or `this-month`
+
+### metric data 
 
 ```
 const metrix = {
@@ -25,13 +28,6 @@ const metrix = {
             }
             
 ```
-### input
-- checkTime<`String`>: Can be either `last-day`, `last-month` or `this-month`
 
-### usage
 
-Will go through all of your actor and their runs for the previous day/month and collect metric data. 
 
-### warning!
-
-This actor is only usable if you have up to few thousands of runs totally since it has to make a separate API call for each run. There is a throttling of max 20 API calls per second.
