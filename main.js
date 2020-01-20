@@ -110,17 +110,17 @@ Apify.main(async () => {
                 startedAt: runInfo.startedAt,
                 finishedAt: runInfo.finishedAt,
                 status: runInfo.status,
-                memAvgMbytes: runInfo.stats.memAvgBytes / (1024 * 1024),
-                memMaxMbytes: runInfo.stats.memMaxBytes / (1024 * 1024),
-                cpuAvgUsage: runInfo.stats.cpuAvgUsage,
-                cpuMaxUsage: runInfo.stats.cpuMaxUsage,
-                runTimeMinutes: runInfo.stats.runTimeSecs / 60,
-                computeUnits: runInfo.stats.computeUnits,
-                memoryMbytes: runInfo.options.memoryMbytes,
+                memAvgMbytes: (runInfo.stats.memAvgBytes / (1024 * 1024)).toFixed(2),
+                memMaxMbytes: (runInfo.stats.memMaxBytes / (1024 * 1024)).toFixed(2),
+                cpuAvgUsage: runInfo.stats.cpuAvgUsage.toFixed(2),
+                cpuMaxUsage: runInfo.stats.cpuMaxUsage.toFixed(2),
+                runTimeMinutes: (runInfo.stats.runTimeSecs / 60).toFixed(2),
+                computeUnits: runInfo.stats.computeUnits.toFixed(2),
+                memoryMbytes: runInfo.options.memoryMbytes.toFixed(2),
                 defaultDatasetId: runInfo.defaultDatasetId,
                 itemCount: itemCount,
-                itemsPerMinute: itemsPerMinute,
-                ItemsPerCU: ItemsPerCU
+                itemsPerMinute: itemsPerMinute.toFixed(2),
+                ItemsPerCU: ItemsPerCU.toFixed(2)
 
             }
             console.log('metrix:', JSON.stringify(metrix))
