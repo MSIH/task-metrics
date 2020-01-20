@@ -99,6 +99,7 @@ Apify.main(async () => {
                 itemCount
             } = await dataset.getInfo();
             console.log('itemCount:', itemCount)
+            console.log('defaultDatasetId:', runInfo.defaultDatasetId)
             return
             console.log('defaultDatasetId:', runInfo.defaultDatasetId)
             /*
