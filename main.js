@@ -114,7 +114,7 @@ Apify.main(async () => {
                 itemCount
             } = await dataset.getInfo();
 
-            const itemsPerMinute = itemCount / (runInfo.stats.runTimeSecs * 60)
+            const itemsPerMinute = itemCount / (runInfo.stats.runTimeSecs / 60)
             const itemsPerCU = itemCount / runInfo.stats.computeUnits
 
 
