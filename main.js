@@ -94,8 +94,10 @@ Apify.main(async () => {
                 actId: myActor.id,
                 runId: run.id,
             })
-            const dataset = await Apify.openDataset(runInfo.defaultDatasetId);
-            const itemCount = (dataset.getInfo()).itemCount
+            const dataset = Apify.openDataset(runInfo.defaultDatasetId);
+            let {
+                itemCount
+            } = await dataset.getInfo();
             console.log('itemCount:', itemCount)
             console.log('runInfo.stats.runTimeSecs:', runInfo.stats.runTimeSecs)
             console.log('runInfo.stats.computeUnits:', runInfo.stats.computeUnits)
@@ -130,8 +132,8 @@ Apify.main(async () => {
 
     }
 
-    const dataset = await Apify.openDataset();
-    await dataset.pushData(stats);
+    const datasetMetrix = await Apify.openDataset();
+    await datasetMetrix.pushData(stats);
     await Apify.setValue('Metrics', stats)
 })
 
