@@ -96,6 +96,14 @@ Apify.main(async () => {
             })
             const dataset = await Apify.openDataset(runInfo.defaultDatasetId);
             const itemCount = dataset.getInfo().itemCount
+            console.log('itemCount:', itemCount)
+            console.log('runInfo.stats.runTimeSecs:', runInfo.stats.runTimeSecs)
+            console.log('runInfo.stats.computeUnits:', runInfo.stats.computeUnits)
+
+            const itemsPerMinute = itemCount / (runInfo.stats.runTimeSecs * 60)
+            console.log('itemsPerMinute:', itemsPerMinute)
+            const ItemsPerCU = itemCount / runInfo.stats.computeUnits
+            console.log('ItemsPerCU:', ItemsPerCU)
 
             const metrix = {
                 actId: runInfo.actId,
@@ -123,7 +131,7 @@ Apify.main(async () => {
     }
 
     const dataset = await Apify.openDataset();
-    await namedDataset.pushData(stats);
+    await dataset.pushData(stats);
     await Apify.setValue('Metrics', stats)
 })
 
