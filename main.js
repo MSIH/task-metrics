@@ -100,9 +100,14 @@ Apify.main(async () => {
                 actId: myActor.id
             })
             
+            taskInfoName = ""
+            if( runInfo.actorTaskId ){
             const taskInfo = await tasks.getTask({
                 taskId : runInfo.actorTaskId               
             })
+            taskInfoName = taskInfo.name
+            }
+                       
 
             let dataset = await Apify.openDataset(runInfo.defaultDatasetId);
             let {
