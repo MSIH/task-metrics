@@ -1,5 +1,4 @@
 const Apify = require('apify');
-const ApifyClient = require('apify-client');
 const moment = require('moment');
 
 console.log('is home', Apify.isAtHome())
@@ -17,26 +16,25 @@ const clearThrottle = setInterval(() => {
     callsThisSecond = 0
 }, 1000)
 
-const getAllActors = async (acts, items, offset) => {
+const getAllActors = async (client, items, offset) => {
     callsThisSecond++
     await waitForThrottle()
-    const newItems = await acts.listActs({
+    const newItems = await client.actor().list()({
         offset,
     }).then(res => res.items);
     items = items.concat(newItems)
     if (newItems.length === 0) {
         return items
     }
-    return getAllActors(acts, items, offset + 1000)
+    return getAllActors(client, items, offset + 1000)
 }
 
-const getRuns = async (acts, items, offset, actId, dateFrom) => {
+const getRuns = async (client, items, offset, actId, dateFrom) => {
     callsThisSecond++
     await waitForThrottle()
-    const newItems = await acts.listRuns({
+    const newItems = await client.actor(actId).runs().list();({
         offset,
         desc: true,
-        actId
     }).then(res => res.items);
     items = items.concat(newItems)
     if (newItems.length === 0) {
@@ -47,7 +45,7 @@ const getRuns = async (acts, items, offset, actId, dateFrom) => {
     if (dateFrom > lastRunDate) {
         return items
     }
-    return getRuns(acts, items, offset + 1000, actId, dateFrom)
+    return getRuns(client, items, offset + 1000, actId, dateFrom)
 }
 
 Apify.main(async () => {
@@ -55,9 +53,9 @@ Apify.main(async () => {
     console.log('input')
     console.dir(input)
 
-    const {
-        actor, task
-    } = Apify.ApifyClient
+    const client = Apify.newClient();
+  //  const { items } = await client.actor("your-actor-id").runs().list();
+        
     let dateFrom
     let dateTo
     if (input.checkTime === 'last-day') {
@@ -79,13 +77,13 @@ Apify.main(async () => {
  //   console.log('Date to')
  //   console.log(dateTo)
 
-    const myActors = input.actor ? await actor(input.actor).get() : await getAllActors(acts, [], 0)
+    const myActors = input.actor ? await client.actor(input.actor).get() : await getAllActors(client, [], 0)
 
    // const myActors = await getAllActors(acts, [], 0)
     console.log(`I have ${myActors.length} actors`)
     for (const myActor of myActors) {
         console.log('checking actor:', myActor.name)
-        const myRuns = await getRuns(acts, [], 0, myActor.id, dateFrom)
+        const myRuns = await getRuns(client, [], 0, myActor.id, dateFrom)
         console.log('runs loaded', myRuns.length)
         const filteredRuns = myRuns.filter(run => new Date(run.startedAt) >= dateFrom && new Date(run.startedAt) < dateTo);
         console.log('runs last day', filteredRuns.length)
@@ -93,13 +91,16 @@ Apify.main(async () => {
         for (const run of filteredRuns) {
             callsThisSecond++
             await waitForThrottle()
-            const runInfo = await acts.getRun({
+            const runInfo = await client.run(run.id).get();
+            /*await acts.getRun({
                 actId: myActor.id,
                 runId: run.id,
-            })
-            const actInfo = await acts.getAct({
+            }) */
+            
+            const actInfo = client.actor(run.id).get();
+                  /*await acts.getAct({
                 actId: myActor.id
-            })
+            })*/
             
             taskInfoName = ""
             if( runInfo.actorTaskId ){
