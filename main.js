@@ -19,9 +19,9 @@ const clearThrottle = setInterval(() => {
 const getAllActors = async (client, items, offset) => {
     callsThisSecond++
     await waitForThrottle()
-    const newItems = await client.actor().list()({
+    const newItems = (await client.actor().list()({
         offset,
-    }).items
+    })).items
    
     items = items.concat(newItems)
     if (newItems.length === 0) {
@@ -41,10 +41,10 @@ const getActor = async (client, items, actorId) => {
 const getRuns = async (client, items, offset, actId, dateFrom) => {
     callsThisSecond++
     await waitForThrottle()
-    const newItems = await client.actor(actId).runs().list();({
+    const newItems = (await client.actor(actId).runs().list();({
         offset,
         desc: true,
-    }).items;
+    })).items;
     items = items.concat(newItems)
     if (newItems.length === 0) {
         return items
