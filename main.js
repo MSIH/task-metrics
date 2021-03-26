@@ -29,6 +29,14 @@ const getAllActors = async (client, items, offset) => {
     return getAllActors(client, items, offset + 1000)
 }
 
+const getActor = async (client, items, actorId) => {
+    callsThisSecond++
+    await waitForThrottle()
+    const newItems = await client.actor(actorId).get()
+    items = items.concat(newItems) 
+    return items
+}
+
 const getRuns = async (client, items, offset, actId, dateFrom) => {
     callsThisSecond++
     await waitForThrottle()
@@ -77,7 +85,7 @@ Apify.main(async () => {
  //   console.log('Date to')
  //   console.log(dateTo)
 
-    const myActors = input.actor ? await client.actor(input.actor).get() : await getAllActors(client, [], 0)
+    const myActors = input.actor ? await getActor(client, [], input.actor) : await getAllActors(client, [], 0)
 
    // const myActors = await getAllActors(acts, [], 0)
     console.log(`I have ${myActors.length} actors`)
