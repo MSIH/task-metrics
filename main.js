@@ -124,11 +124,10 @@ Apify.main(async () => {
             }
                        
 
-            let dataset = await Apify.openDataset(runInfo.defaultDatasetId);
-            let {
-                itemCount
-            } = await dataset.getInfo();
-
+            
+            const getStats = await Apify.getvalue(SDK_CRAWLER_STATISTICS_0);
+const itemCount = getStats.requestsFinished
+            
             const itemsPerMinute = itemCount / (runInfo.stats.runTimeSecs / 60)
             const itemsPerCU = itemCount / runInfo.stats.computeUnits
 
