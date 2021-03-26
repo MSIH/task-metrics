@@ -56,8 +56,8 @@ Apify.main(async () => {
     console.dir(input)
 
     const {
-        acts, tasks
-    } = Apify.client
+        actor, task
+    } = Apify.ApifyClient
     let dateFrom
     let dateTo
     if (input.checkTime === 'last-day') {
@@ -79,7 +79,7 @@ Apify.main(async () => {
  //   console.log('Date to')
  //   console.log(dateTo)
 
-    const myActors = input.actor ? await ApifyClient.Actor(input.actor).get() : await getAllActors(acts, [], 0)
+    const myActors = input.actor ? await actor(input.actor).get() : await getAllActors(acts, [], 0)
 
    // const myActors = await getAllActors(acts, [], 0)
     console.log(`I have ${myActors.length} actors`)
