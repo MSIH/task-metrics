@@ -124,10 +124,10 @@ Apify.main(async () => {
             }
                       
             const kvs = await Apify.openKeyValueStore(runInfo.defaultKeyValueStoreId);
-            console.dir(kvs);
+         //   console.dir(kvs);
             const getStats = await kvs.getValue('SDK_CRAWLER_STATISTICS_0');
-            console.dir(getStats);
-const itemCount = getStats.requestsFinished
+         //   console.dir(getStats);
+const itemCount = getStats? getStats.requestsFinished : 0
             
             const itemsPerMinute = itemCount / (runInfo.stats.runTimeSecs / 60)
             const itemsPerCU = itemCount / runInfo.stats.computeUnits
