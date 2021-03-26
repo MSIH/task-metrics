@@ -116,9 +116,10 @@ Apify.main(async () => {
             
             taskInfoName = ""
             if( runInfo.actorTaskId ){
-            const taskInfo = await tasks.getTask({
+            const taskInfo = client.task(runInfo.actorTaskId).get();
+                  /*await tasks.getTask({
                 taskId : runInfo.actorTaskId               
-            })
+            })*/
             taskInfoName = taskInfo.name
             }
                        
