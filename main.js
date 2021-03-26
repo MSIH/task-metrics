@@ -25,7 +25,7 @@ const getAllActors = async (client, items, offset) => {
    
     items = items.concat(newItems)
     if (newItems.length === 0) {
-        console.dir(items);
+      //  console.dir(items);
         return items
     }
     return getAllActors(client, items, offset + 1000)
@@ -36,7 +36,7 @@ const getActor = async (client, items, actorId) => {
     await waitForThrottle()
     const newItems = await client.actor(actorId).get()
     items = items.concat(newItems) 
-    console.dir(items);
+   // console.dir(items);
     return items
 }
 
@@ -141,17 +141,17 @@ Apify.main(async () => {
                 startedAt: runInfo.startedAt,
                 finishedAt: runInfo.finishedAt,
                 status: runInfo.status,
-                memAvgMbytes: (runInfo.stats.memAvgBytes / (1024 * 1024)).toFixed(2),
-                memMaxMbytes: (runInfo.stats.memMaxBytes / (1024 * 1024)).toFixed(2),
-                cpuAvgUsage: runInfo.stats.cpuAvgUsage.toFixed(2),
-                cpuMaxUsage: runInfo.stats.cpuMaxUsage.toFixed(2),
-                runTimeMinutes: (runInfo.stats.runTimeSecs / 60).toFixed(2),
-                computeUnits: runInfo.stats.computeUnits.toFixed(2),
-                memoryMbytes: runInfo.options.memoryMbytes.toFixed(2),
+                memAvgMbytes: (+runInfo.stats.memAvgBytes / (1024 * 1024)).toFixed(2),
+                memMaxMbytes: (+runInfo.stats.memMaxBytes / (1024 * 1024)).toFixed(2),
+                cpuAvgUsage: +runInfo.stats.cpuAvgUsage.toFixed(2),
+                cpuMaxUsage: +runInfo.stats.cpuMaxUsage.toFixed(2),
+                runTimeMinutes: (+runInfo.stats.runTimeSecs / 60).toFixed(2),
+                computeUnits: +runInfo.stats.computeUnits.toFixed(2),
+                memoryMbytes: +runInfo.options.memoryMbytes.toFixed(2),
                 defaultDatasetId: runInfo.defaultDatasetId,
                 itemCount: itemCount,
-                itemsPerMinute: itemsPerMinute.toFixed(2),
-                ItemsPerCU: itemsPerCU.toFixed(2)
+                itemsPerMinute: +itemsPerMinute.toFixed(2),
+                ItemsPerCU: +itemsPerCU.toFixed(2)
 
             }
             console.log('metrix:', JSON.stringify(metrix))
