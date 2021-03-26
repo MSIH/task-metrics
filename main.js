@@ -47,7 +47,7 @@ const getRuns = async (client, items, offset, actId, dateFrom) => {
         offset,
         desc: true,
     })).items;
-    console.dir(newItems);
+    //console.dir(newItems);
     items = items.concat(newItems)
     if (newItems.length === 0) {
         return items
