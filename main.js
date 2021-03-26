@@ -21,7 +21,8 @@ const getAllActors = async (client, items, offset) => {
     await waitForThrottle()
     const newItems = await client.actor().list()({
         offset,
-    }).then(res => res.items);
+    }).items
+   
     items = items.concat(newItems)
     if (newItems.length === 0) {
         return items
@@ -43,7 +44,7 @@ const getRuns = async (client, items, offset, actId, dateFrom) => {
     const newItems = await client.actor(actId).runs().list();({
         offset,
         desc: true,
-    }).then(res => res.items);
+    }).items;
     items = items.concat(newItems)
     if (newItems.length === 0) {
         return items
