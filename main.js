@@ -43,7 +43,7 @@ const getActor = async (client, items, actorId) => {
 const getRuns = async (client, items, offset, actId, dateFrom) => {
     callsThisSecond++
     await waitForThrottle()
-    const newItems = (await client.actor(actId).runs().list()({
+    const newItems = (await client.actor(actId).runs().list({
         offset,
         desc: true,
     })).items;
