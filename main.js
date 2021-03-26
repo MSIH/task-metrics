@@ -25,6 +25,7 @@ const getAllActors = async (client, items, offset) => {
    
     items = items.concat(newItems)
     if (newItems.length === 0) {
+        console.dir(items);
         return items
     }
     return getAllActors(client, items, offset + 1000)
@@ -35,6 +36,7 @@ const getActor = async (client, items, actorId) => {
     await waitForThrottle()
     const newItems = await client.actor(actorId).get()
     items = items.concat(newItems) 
+    console.dir(items);
     return items
 }
 
@@ -45,6 +47,7 @@ const getRuns = async (client, items, offset, actId, dateFrom) => {
         offset,
         desc: true,
     })).items;
+    console.dir(newItems);
     items = items.concat(newItems)
     if (newItems.length === 0) {
         return items
