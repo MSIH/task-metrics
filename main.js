@@ -19,7 +19,7 @@ const clearThrottle = setInterval(() => {
 const getAllActors = async (client, items, offset) => {
     callsThisSecond++
     await waitForThrottle()
-    const newItems = (await client.actor().list()({
+    const newItems = (await client.actor().list({
         offset,
     })).items
    
