@@ -1,4 +1,5 @@
 const Apify = require('apify');
+const ApifyClient = require('apify-client');
 const moment = require('moment');
 
 console.log('is home', Apify.isAtHome())
@@ -78,7 +79,7 @@ Apify.main(async () => {
  //   console.log('Date to')
  //   console.log(dateTo)
 
-    const myActors = input.actor ? await Apify.client.Actor(input.actor).get() : await getAllActors(acts, [], 0)
+    const myActors = input.actor ? await ApifyClient.Actor(input.actor).get() : await getAllActors(acts, [], 0)
 
    // const myActors = await getAllActors(acts, [], 0)
     console.log(`I have ${myActors.length} actors`)
