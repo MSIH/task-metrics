@@ -73,10 +73,10 @@ Apify.main(async () => {
     }
     const stats = [];
 
-    console.log('Date from')
-    console.log(dateFrom)
-    console.log('Date to')
-    console.log(dateTo)
+ //   console.log('Date from')
+//    console.log(dateFrom)
+ //   console.log('Date to')
+ //   console.log(dateTo)
 
     const myActors = input.actor ? await Apify.client.Actor(input.actor).get() : await getAllActors(acts, [], 0)
 
