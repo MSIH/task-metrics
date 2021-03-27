@@ -22,7 +22,7 @@ const getAllActors = async (client, items) => {
     console.log('actors')
     const newItems = await client.actors().list();
    
-    items = items.concat(newItems)
+    items = items.concat(newItems.items)
      return items
     /*if (newItems.length === 0) {
       //  console.dir(items);
