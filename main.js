@@ -20,7 +20,7 @@ const getAllActors = async (client, items) => {
     callsThisSecond++
     await waitForThrottle()
     console.log('actors')
-    const newItems = await client.actor().list();
+    const newItems = await client.actors().list();
    
     items = items.concat(newItems)
      return items
