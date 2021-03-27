@@ -91,7 +91,7 @@ Apify.main(async () => {
  //   console.log(dateTo)
 
     const myActors = input.actor ? await getActor(client, [], input.actor) : await getAllActors(client, [])
-console.dir(myActors)
+//console.dir(myActors)
    // const myActors = await getAllActors(acts, [], 0)
     console.log(`I have ${myActors.length} actors`)
     for (const myActor of myActors) {
