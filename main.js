@@ -36,7 +36,7 @@ const getActor = async (client, items, actorId) => {
     callsThisSecond++
     await waitForThrottle()
     const newItems = await client.actor(actorId).get()
-    items = items.concat(newItems) og
+    items = items.concat(newItems)
    // console.dir(items);
     return items
 }
