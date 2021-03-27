@@ -24,11 +24,13 @@ const getAllActors = async (client, items, offset) => {
     })).items
    
     items = items.concat(newItems)
-    if (newItems.length === 0) {
+     return items
+    /*if (newItems.length === 0) {
       //  console.dir(items);
-        return items
+       
     }
     return getAllActors(client, items, offset + 1000)
+    */
 }
 
 const getActor = async (client, items, actorId) => {
