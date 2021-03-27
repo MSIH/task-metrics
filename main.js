@@ -16,9 +16,10 @@ const clearThrottle = setInterval(() => {
     callsThisSecond = 0
 }, 1000)
 
-const getAllActors = async (client, items, offset) => {
+const getAllActors = async (client, items) => {
     callsThisSecond++
     await waitForThrottle()
+    console.log('actors')
     const newItems = await client.actor().list();
    
     items = items.concat(newItems)
@@ -35,7 +36,7 @@ const getActor = async (client, items, actorId) => {
     callsThisSecond++
     await waitForThrottle()
     const newItems = await client.actor(actorId).get()
-    items = items.concat(newItems) 
+    items = items.concat(newItems) og
    // console.dir(items);
     return items
 }
@@ -89,7 +90,7 @@ Apify.main(async () => {
  //   console.log('Date to')
  //   console.log(dateTo)
 
-    const myActors = input.actor ? await getActor(client, [], input.actor) : await getAllActors(client, [], 0)
+    const myActors = input.actor ? await getActor(client, [], input.actor) : await getAllActors(client, [])
 console.dir(myActors)
    // const myActors = await getAllActors(acts, [], 0)
     console.log(`I have ${myActors.length} actors`)
